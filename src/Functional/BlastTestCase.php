@@ -35,7 +35,7 @@ class BlastTestCase extends KernelTestCase
     }
 
     /** Service Test **/
-    protected function isServicesAreInitializable(string $srvname)
+    protected function isServicesAreInitializable($srvname)
     {
         $serviceIds = array_filter($this->container->getServiceIds(), function ($serviceId) {
             return 0 === strpos($serviceId, $srvname);
@@ -77,6 +77,10 @@ class BlastTestCase extends KernelTestCase
         return $res;
     }
 
+    /**
+     * @todo move command alias to a trait (or not) (maybe one for cache and one for doctrine...)
+     */
+    
     protected function cacheClear()
     {
         return $this->launchCommand([
@@ -84,7 +88,7 @@ class BlastTestCase extends KernelTestCase
             '--no-warmup' => true,
         ]);
     }
-
+    
     protected function dropDatabase()
     {
         return $this->launchCommand([
