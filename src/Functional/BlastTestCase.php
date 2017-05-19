@@ -5,8 +5,8 @@
  *
  * Copyright (C) 2015-2017 Libre Informatique
  *
- * This file is licenced under the GNU GPL v3.
- * For the full copyright and license information, please view the LICENSE
+ * This file is licenced under the GNU LGPL v3.
+ * For the full copyright and license information, please view the LICENSE.md
  * file that was distributed with this source code.
  */
 
@@ -29,8 +29,8 @@ class BlastTestCase extends KernelTestCase
     protected function setUp()
     {
         static::bootKernel();
-        
-        /** @var Container $container */
+
+        /* @var Container $container */
         $this->container = self::$kernel->getContainer();
     }
 
@@ -43,26 +43,25 @@ class BlastTestCase extends KernelTestCase
                 return 0 === strpos($serviceId, $srvname);
             }
         );
-        
+
         foreach ($serviceIds as $serviceId) {
             $this->assertNotNull($this->container->get($serviceId));
         }
     }
 
-    
     /** Command Test **/
     protected function launchCommand(array $cmdargs)
     {
         $this->application = new Application(self::$kernel);
 
-        /**
+        /*
          * @todo : check find result before continue
          */
         $this->command = $this->application->find($cmdargs['command']);
 
-        /** @todo find why or why not CommandTester */
+        /* @todo find why or why not CommandTester */
         //        $this->command = new CommandTester($this->application->find($cmdargs['command']));
-   
+
         $this->application->add($this->command);
         if (in_array(['--no-interaction'], $cmdargs)) {
             $cmdargs['--no-interaction'] = true;
@@ -74,7 +73,7 @@ class BlastTestCase extends KernelTestCase
          * @todo: add a try catch
          */
         $res = $this->command->run($this->input, $this->output);
-        
+
         $this->assertEquals(0, $res);
 
         return $res;
@@ -83,7 +82,6 @@ class BlastTestCase extends KernelTestCase
     /**
      * @todo move command alias to a trait (or not) (maybe one for cache and one for doctrine...)
      */
-    
     protected function cacheClear()
     {
         return $this->launchCommand([
@@ -91,7 +89,7 @@ class BlastTestCase extends KernelTestCase
             '--no-warmup' => true,
         ]);
     }
-    
+
     protected function dropDatabase()
     {
         return $this->launchCommand([
