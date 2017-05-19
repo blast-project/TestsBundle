@@ -37,9 +37,12 @@ class BlastTestCase extends KernelTestCase
     /** Service Test **/
     protected function isServicesAreInitializable($srvname)
     {
-        $serviceIds = array_filter($this->container->getServiceIds(), function ($serviceId) {
-            return 0 === strpos($serviceId, $srvname);
-        });
+        $serviceIds = array_filter(
+            $this->container->getServiceIds(),
+            function ($serviceId) use ($srvname) {
+                return 0 === strpos($serviceId, $srvname);
+            }
+        );
         
         foreach ($serviceIds as $serviceId) {
             $this->assertNotNull($this->container->get($serviceId));
