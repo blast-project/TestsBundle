@@ -20,9 +20,7 @@ use Symfony\Component\Console\Tester\CommandTester;
 
 class BlastTestCase extends KernelTestCase
 {
-    /**
-     * @todo: move this classe in a blast test bundle
-     */
+    protected $container;
     protected $application;
     protected $input;
     protected $output;
@@ -30,9 +28,26 @@ class BlastTestCase extends KernelTestCase
 
     protected function setUp()
     {
-           static::bootKernel();
+        static::bootKernel();
+        
+        /** @var Container $container */
+        $this->container = self::$kernel->getContainer();
     }
 
+    /** Service Test **/
+    protected function isServicesAreInitializable(string $srvname)
+    {
+        $serviceIds = array_filter($this->container->getServiceIds(), function ($serviceId) {
+            return 0 === strpos($serviceId, $srvname);
+        });
+        
+        foreach ($serviceIds as $serviceId) {
+            $this->assertNotNull($this->container->get($serviceId));
+        }
+    }
+
+    
+    /** Command Test **/
     protected function launchCommand(array $cmdargs)
     {
         $this->application = new Application(self::$kernel);
