@@ -1,11 +1,22 @@
 <?php
+
+/*
+ * This file is part of the Blast Project package.
+ *
+ * Copyright (C) 2015-2017 Libre Informatique
+ *
+ * This file is licenced under the GNU GPL v3.
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
+
 namespace Blast\Tests\Functional;
 
 use Symfony\Bundle\FrameworkBundle\Test\KernelTestCase;
 use Symfony\Bundle\FrameworkBundle\Console\Application;
 use Symfony\Component\Console\Output\ConsoleOutput;
 use Symfony\Component\Console\Input\ArrayInput;
-/**
+/*
  * @todo remove this or not
  use Doctrine\Bundle\DoctrineBundle\Command\DropDatabaseDoctrineCommand;
  use Doctrine\Bundle\DoctrineBundle\Command\CreateDatabaseDoctrineCommand;
@@ -34,14 +45,14 @@ class BlastTestCase extends KernelTestCase
         // var_dump(gettype($this->command));
         // var_dump(get_class($this->command));
         // var_dump($cmdargs);
-        
+
         $this->application->add($this->command);
         if (in_array(['--no-interaction'], $cmdargs)) {
             $cmdargs['--no-interaction'] = true;
         }
         $this->input = new ArrayInput($cmdargs);
         $this->output = new ConsoleOutput();
-        
+
         $res = $this->command->run($this->input, $this->output);
         //  var_dump($res);
         return $res;
@@ -51,16 +62,16 @@ class BlastTestCase extends KernelTestCase
     {
         $this->launchCommand([
             'command' => 'cache:clear',
-            '--no-warmup' => true
+            '--no-warmup' => true,
         ]);
     }
-    
+
     protected function dropDatabase()
     {
         $this->launchCommand([
             'command' => 'doctrine:database:drop',
             '--if-exists' => true,
-            '--force' => true
+            '--force' => true,
         ]);
     }
 
@@ -68,7 +79,7 @@ class BlastTestCase extends KernelTestCase
     {
         $this->launchCommand([
             'command' => 'doctrine:database:create',
-            '--if-not-exists' => true
+            '--if-not-exists' => true,
           ]);
     }
 
@@ -82,7 +93,7 @@ class BlastTestCase extends KernelTestCase
     protected function validateSchema()
     {
         $this->launchCommand([
-            'command' => 'doctrine:schema:validate'
+            'command' => 'doctrine:schema:validate',
         ]);
     }
 
@@ -90,7 +101,7 @@ class BlastTestCase extends KernelTestCase
     {
         $this->launchCommand([
             'command' => 'doctrine:schema:update',
-            '--force' => true
+            '--force' => true,
         ]);
     }
 }
