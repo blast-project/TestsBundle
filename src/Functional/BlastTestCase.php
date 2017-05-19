@@ -34,9 +34,13 @@ class BlastTestCase extends KernelTestCase
     protected $output;
     protected $command;
 
+    protected function setUp()
+    {
+           static::bootKernel();
+    }
+
     protected function launchCommand(array $cmdargs)
     {
-        static::bootKernel();
         $this->application = new Application(self::$kernel);
         // var_dump($this->application->all('doctrine'));
         $this->command = $this->application->find($cmdargs['command']);
@@ -53,14 +57,19 @@ class BlastTestCase extends KernelTestCase
         $this->input = new ArrayInput($cmdargs);
         $this->output = new ConsoleOutput();
 
+        /**
+         * @todo: add a try catch
+         */
         $res = $this->command->run($this->input, $this->output);
-        //  var_dump($res);
+        
+        $this->assertEquals(0, $res);
+
         return $res;
     }
 
     protected function cacheClear()
     {
-        $this->launchCommand([
+        return $this->launchCommand([
             'command' => 'cache:clear',
             '--no-warmup' => true,
         ]);
@@ -68,7 +77,7 @@ class BlastTestCase extends KernelTestCase
 
     protected function dropDatabase()
     {
-        $this->launchCommand([
+        return $this->launchCommand([
             'command' => 'doctrine:database:drop',
             '--if-exists' => true,
             '--force' => true,
@@ -77,7 +86,7 @@ class BlastTestCase extends KernelTestCase
 
     protected function createDatabase()
     {
-        $this->launchCommand([
+        return $this->launchCommand([
             'command' => 'doctrine:database:create',
             '--if-not-exists' => true,
           ]);
@@ -85,21 +94,21 @@ class BlastTestCase extends KernelTestCase
 
     protected function createSchema()
     {
-        $this->launchCommand([
+        return $this->launchCommand([
             'command' => 'doctrine:schema:create',
         ]);
     }
 
     protected function validateSchema()
     {
-        $this->launchCommand([
+        return $this->launchCommand([
             'command' => 'doctrine:schema:validate',
         ]);
     }
 
     protected function updateSchema()
     {
-        $this->launchCommand([
+        return $this->launchCommand([
             'command' => 'doctrine:schema:update',
             '--force' => true,
         ]);
