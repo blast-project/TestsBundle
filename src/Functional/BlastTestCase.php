@@ -16,12 +16,6 @@ use Symfony\Bundle\FrameworkBundle\Test\KernelTestCase;
 use Symfony\Bundle\FrameworkBundle\Console\Application;
 use Symfony\Component\Console\Output\ConsoleOutput;
 use Symfony\Component\Console\Input\ArrayInput;
-/*
- * @todo remove this or not
- use Doctrine\Bundle\DoctrineBundle\Command\DropDatabaseDoctrineCommand;
- use Doctrine\Bundle\DoctrineBundle\Command\CreateDatabaseDoctrineCommand;
- use Doctrine\Bundle\DoctrineBundle\Command\Proxy\CreateSchemaDoctrineCommand;
-*/
 use Symfony\Component\Console\Tester\CommandTester;
 
 class BlastTestCase extends KernelTestCase
@@ -42,14 +36,15 @@ class BlastTestCase extends KernelTestCase
     protected function launchCommand(array $cmdargs)
     {
         $this->application = new Application(self::$kernel);
-        // var_dump($this->application->all('doctrine'));
-        $this->command = $this->application->find($cmdargs['command']);
-        /* @todo find why or why not CommandTester */
-        //        $this->command = new CommandTester($this->application->find($cmdargs['command']));
-        // var_dump(gettype($this->command));
-        // var_dump(get_class($this->command));
-        // var_dump($cmdargs);
 
+        /**
+         * @todo : check find result before continue
+         */
+        $this->command = $this->application->find($cmdargs['command']);
+
+        /** @todo find why or why not CommandTester */
+        //        $this->command = new CommandTester($this->application->find($cmdargs['command']));
+   
         $this->application->add($this->command);
         if (in_array(['--no-interaction'], $cmdargs)) {
             $cmdargs['--no-interaction'] = true;
