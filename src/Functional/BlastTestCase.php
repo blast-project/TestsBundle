@@ -10,7 +10,7 @@
  * file that was distributed with this source code.
  */
 
-namespace Blast\Tests\Functional;
+namespace Blast\TestsBundle\Functional;
 
 use Symfony\Bundle\FrameworkBundle\Test\KernelTestCase;
 use Symfony\Bundle\FrameworkBundle\Console\Application;
