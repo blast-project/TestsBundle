@@ -4,14 +4,9 @@
     "description": "Extends Symfony KernelTestCase",
     "require": {
         "php": ">=5.6",
-        "symfony/symfony": "3.2.*",
-	"symfony/phpunit-bridge": "3.2.*",
-	"symfony/console": "3.2.*"
-    },
-    "scripts": {
-	"test": [
-	    "phpunit"
-	]
+        "symfony/symfony": ">=3.2",
+	"symfony/phpunit-bridge": ">=3.2",
+	"symfony/console": ">=3.2"
     },
     "license": "LGPL-3.0",
     "keywords": [
