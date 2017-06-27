@@ -17,6 +17,7 @@ use PHPUnit\Framework\TestCase;
 class BlastApiTestCase extends TestCase
 {
     /********** Test Api **********/
+    protected $base;
     protected $token;
     protected $result;
     
@@ -45,43 +46,45 @@ class BlastApiTestCase extends TestCase
     
     public function request($uri, $method = 'GET', array $data = [])
     {
-        $ch = curl_init($this->base.$uri);
+        if (isset($this->base)) {
+            $ch = curl_init($this->base.$uri);
+            
+            if ($data) {
+                curl_setopt($ch, CURLOPT_POSTFIELDS, json_encode($data));
+            }
+            
+            $headers = ['Content-Type: application/json'];
+            if ($this->token) {
+                $headers[] = 'Authorization: Bearer '.$this->token;
+            }
+            
+            curl_setopt_array($ch, [
+                CURLOPT_HTTPHEADER     => $headers,
+                CURLOPT_RETURNTRANSFER => true,
+                CURLOPT_SSL_VERIFYHOST => 0,
+                CURLOPT_SSL_VERIFYPEER => 0,
+                CURLOPT_CUSTOMREQUEST  => $method,
+            ]);
+            
+            $h = implode('" -H "', $headers);
+            
+            $this->lastCurlEquivalent = sprintf(
+                '$ curl -k "%s" -H "%s" -X %s %s',
+                str_replace(
+                    ['[', ']', ' '],
+                    ['\\[', '\\]', '%20'],
+                    $this->base.$uri
+                ),
+                $h,
+                $method,
+                $data ? "--data '".json_encode($data)."'" : ''
+            );
         
-        if ($data) {
-            curl_setopt($ch, CURLOPT_POSTFIELDS, json_encode($data));
+            getHTTPResult($ch);
+            
+            curl_close($ch);
         }
-        
-        $headers = ['Content-Type: application/json'];
-        if ($this->token) {
-            $headers[] = 'Authorization: Bearer '.$this->token;
-        }
-        
-        curl_setopt_array($ch, [
-            CURLOPT_HTTPHEADER     => $headers,
-            CURLOPT_RETURNTRANSFER => true,
-            CURLOPT_SSL_VERIFYHOST => 0,
-            CURLOPT_SSL_VERIFYPEER => 0,
-            CURLOPT_CUSTOMREQUEST  => $method,
-        ]);
-        
-        $h = implode('" -H "', $headers);
-
-        $this->lastCurlEquivalent = sprintf(
-            '$ curl -k "%s" -H "%s" -X %s %s',
-            str_replace(
-                ['[', ']', ' '],
-                ['\\[', '\\]', '%20'],
-                $this->base.$uri
-            ),
-            $h,
-            $method,
-            $data ? "--data '".json_encode($data)."'" : ''
-        );
-        
-        getHTTPResult($ch);
-        
-        curl_close($ch);
-        return $res;
+        //        return $res;
     }
 
     
