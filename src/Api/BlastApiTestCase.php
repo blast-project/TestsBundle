@@ -16,31 +16,81 @@ use PHPUnit\Framework\TestCase;
 
 class BlastApiTestCase extends TestCase
 {
+
+    /********** Api Tools **********/
+    protected $token;
+    protected $identifier = '';
+    protected $secret = '';
+
     /********** Test Api **********/
     protected $base;
-    protected $token;
     protected $result;
+    protected $show_results;
+    protected $show_curl;
     
     /********** HTTPResult **********/
     protected $data;
     protected $status;
     protected $resource;
 
+    /********** PhpUnit SetUp **********/
+    public function setUp()
+    {
+        global $argv, $argc;
+        var_dump($argc);
+        
+        if ($argc != 5) {
+            die("Usage: phpunit tests URL USERNAME PASSWORD\n");
+        }
 
+        /* @todo check if base is a valid url */
+        
+        $this->base = $argv[2];
+        $this->identifier =  $argv[3];
+        $this->secret =  $argv[4];
+
+        // $this->show_results = true;
+        // $this->show_curl = true;
+    }
+
+    
+    /********** Api Tools **********/
+    public function initToken($endpoint, $option, $tokenKey = 'access_token')
+    {
+        $route = $endpoint . "?" . http_build_query($option);
+        $this->request($route);
+        $json = $this->getData(true);
+        $this->assertArrayHasKey($tokenKey, $json);
+        $this->token = $json[$tokenKey];
+        $this->printResult($endpoint, 'token');
+        return $this;
+    }
+
+    
+    
     /********** Test Api **********/
     public function printResult($endpoint, $action)
     {
-        if ($this->show_results) {
-            echo $this->getData()."\n";
-        }
-        echo $this->lastCurlEquivalent."\n\n";
-        $this->lastCurlEquivalent = '';
-        
+        echo "\n\n";
+      
+        echo "######## Result ########\n";
         echo "$endpoint | $action | ";
         echo !$this->isSuccess() ? 'ERROR' : 'SUCCESS';
-        echo ': HTTP '.$this->getStatus();
+        echo ': HTTP '.$this->getStatus()."\n";
+      
+
+        if ($this->show_curl) {
+            echo "######## Curl ########\n";
+            echo $this->lastCurlEquivalent."\n";
+            $this->lastCurlEquivalent = '';
+        }
+
+        if ($this->show_results) {
+            echo "######## Data ########\n";
+            echo $this->getData()."\n";
+        }
         
-        echo "\n\n\n";
+        echo "\n\n";
         return $this;
     }
     
@@ -66,21 +116,23 @@ class BlastApiTestCase extends TestCase
                 CURLOPT_CUSTOMREQUEST  => $method,
             ]);
             
-            $h = implode('" -H "', $headers);
             
-            $this->lastCurlEquivalent = sprintf(
-                '$ curl -k "%s" -H "%s" -X %s %s',
-                str_replace(
-                    ['[', ']', ' '],
-                    ['\\[', '\\]', '%20'],
-                    $this->base.$uri
-                ),
-                $h,
-                $method,
-                $data ? "--data '".json_encode($data)."'" : ''
-            );
+            if ($this->show_curl) {
+                $h = implode('" -H "', $headers);
+                $this->lastCurlEquivalent = sprintf(
+                    '$ curl -k "%s" -H "%s" -X %s %s',
+                    str_replace(
+                        ['[', ']', ' '],
+                        ['\\[', '\\]', '%20'],
+                        $this->base.$uri
+                    ),
+                    $h,
+                    $method,
+                    $data ? "--data '".json_encode($data)."'" : ''
+                );
+            }
         
-            getHTTPResult($ch);
+            $this->getHTTPResult($ch);
             
             curl_close($ch);
         }
