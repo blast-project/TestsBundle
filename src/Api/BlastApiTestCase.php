@@ -37,20 +37,26 @@ class BlastApiTestCase extends TestCase
     public function setUp()
     {
         global $argv, $argc;
-        var_dump($argc);
+               
+        $optidx = array_search('CONF', $argv);
         
-        if ($argc != 5) {
-            die("Usage: phpunit tests URL USERNAME PASSWORD\n");
+        if (!$optidx || $argc < $optidx + 3) {
+            die("Usage: phpunit tests CONF 'http://my.url.srv' username password\n");
         }
 
         /* @todo check if base is a valid url */
         
-        $this->base = $argv[2];
-        $this->identifier =  $argv[3];
-        $this->secret =  $argv[4];
+        $this->base = $argv[$optidx + 1];
+        $this->identifier =  $argv[$optidx + 2];
+        $this->secret =  $argv[$optidx + 3];
 
-        // $this->show_results = true;
-        // $this->show_curl = true;
+        if (array_search('SHOW_RESULT', $argv)) {
+            $this->show_results = true;
+        }
+
+        if (array_search('SHOW_CURL', $argv)) {
+            $this->show_curl = true;
+        }
     }
 
     
@@ -62,7 +68,6 @@ class BlastApiTestCase extends TestCase
         $json = $this->getData(true);
         $this->assertArrayHasKey($tokenKey, $json);
         $this->token = $json[$tokenKey];
-        $this->printResult($endpoint, 'token');
         return $this;
     }
 
@@ -135,6 +140,8 @@ class BlastApiTestCase extends TestCase
             $this->getHTTPResult($ch);
             
             curl_close($ch);
+            
+            $this->printResult($uri, $method);
         }
         //        return $res;
     }
@@ -163,11 +170,22 @@ class BlastApiTestCase extends TestCase
     {
         return $this->status;
     }
+
+    public function assertStatus($wantedStatus = 200)
+    {
+        return $this->assertEquals($wantedStatus, $this->getStatus());
+    }
     
     public function isSuccess()
     {
         return $this->status < 400;
     }
+
+    public function assertSuccess()
+    {
+        return $this->assertTrue($this->isSuccess());
+    }
+    
     
     public function __toString()
     {
