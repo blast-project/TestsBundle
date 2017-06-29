@@ -201,6 +201,9 @@ class BlastApiTestCase extends TestCase
     public function getOneFromList($i = -1)
     {
         $data = $this->getData(true)['_embedded']['items'];
-        return $i < 0 ? $data[rand(0, count($data)-1)] : $data[$i];
+        if (count($data) == 0) {
+            return [];
+        }
+        return $i < 0 ? $data[rand(0, count($data) - 1)] : $data[$i];
     }
 }
