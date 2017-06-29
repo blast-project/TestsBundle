@@ -16,7 +16,6 @@ use PHPUnit\Framework\TestCase;
 
 class BlastApiTestCase extends TestCase
 {
-
     /********** Api Tools **********/
     protected $token;
     protected $identifier = '';
@@ -27,7 +26,7 @@ class BlastApiTestCase extends TestCase
     protected $result;
     protected $show_results;
     protected $show_curl;
-    
+
     /********** HTTPResult **********/
     protected $data;
     protected $status;
@@ -37,18 +36,18 @@ class BlastApiTestCase extends TestCase
     public function setUp()
     {
         global $argv, $argc;
-               
+
         $optidx = array_search('CONF', $argv);
-        
+
         if (!$optidx || $argc < $optidx + 3) {
             die("Usage: phpunit tests CONF 'http://my.url.srv' username password\n");
         }
 
         /* @todo check if base is a valid url */
-        
+
         $this->base = $argv[$optidx + 1];
-        $this->identifier =  $argv[$optidx + 2];
-        $this->secret =  $argv[$optidx + 3];
+        $this->identifier = $argv[$optidx + 2];
+        $this->secret = $argv[$optidx + 3];
 
         if (array_search('SHOW_RESULT', $argv)) {
             $this->show_results = true;
@@ -59,30 +58,27 @@ class BlastApiTestCase extends TestCase
         }
     }
 
-    
     /********** Api Tools **********/
     public function initToken($endpoint, $option, $tokenKey = 'access_token')
     {
-        $route = $endpoint . "?" . http_build_query($option);
+        $route = $endpoint.'?'.http_build_query($option);
         $this->request($route);
         $json = $this->getData(true);
         $this->assertArrayHasKey($tokenKey, $json);
         $this->token = $json[$tokenKey];
+
         return $this;
     }
 
-    
-    
     /********** Test Api **********/
     public function printResult($endpoint, $action)
     {
         echo "\n\n";
-      
+
         echo "######## Result ########\n";
         echo "$endpoint | $action | ";
         echo !$this->isSuccess() ? 'ERROR' : 'SUCCESS';
         echo ': HTTP '.$this->getStatus()."\n";
-      
 
         if ($this->show_curl) {
             echo "######## Curl ########\n";
@@ -94,34 +90,34 @@ class BlastApiTestCase extends TestCase
             echo "######## Data ########\n";
             echo $this->getData()."\n";
         }
-        
+
         echo "\n\n";
+
         return $this;
     }
-    
+
     public function request($uri, $method = 'GET', array $data = [])
     {
         if (isset($this->base)) {
             $ch = curl_init($this->base.$uri);
-            
+
             if ($data) {
                 curl_setopt($ch, CURLOPT_POSTFIELDS, json_encode($data));
             }
-            
+
             $headers = ['Content-Type: application/json'];
             if ($this->token) {
                 $headers[] = 'Authorization: Bearer '.$this->token;
             }
-            
+
             curl_setopt_array($ch, [
-                CURLOPT_HTTPHEADER     => $headers,
+                CURLOPT_HTTPHEADER => $headers,
                 CURLOPT_RETURNTRANSFER => true,
                 CURLOPT_SSL_VERIFYHOST => 0,
                 CURLOPT_SSL_VERIFYPEER => 0,
-                CURLOPT_CUSTOMREQUEST  => $method,
+                CURLOPT_CUSTOMREQUEST => $method,
             ]);
-            
-            
+
             if ($this->show_curl) {
                 $h = implode('" -H "', $headers);
                 $this->lastCurlEquivalent = sprintf(
@@ -136,36 +132,35 @@ class BlastApiTestCase extends TestCase
                     $data ? "--data '".json_encode($data)."'" : ''
                 );
             }
-        
+
             $this->getHTTPResult($ch);
-            
+
             curl_close($ch);
-            
+
             $this->printResult($uri, $method);
         }
         //        return $res;
     }
 
-    
     /********** HTTPResult **********/
-    
+
     public function getHTTPResult($curlResource)
     {
         $this->resource = $curlResource;
         $this->data = curl_exec($curlResource);
         $this->status = curl_getinfo($curlResource, CURLINFO_HTTP_CODE);
     }
-    
+
     public function getCurlResource()
     {
         return $this->resource;
     }
-    
+
     public function getData($json = false)
     {
-            return $json ? json_decode($this->data, true) : $this->data;
+        return $json ? json_decode($this->data, true) : $this->data;
     }
-    
+
     public function getStatus()
     {
         return $this->status;
@@ -175,7 +170,7 @@ class BlastApiTestCase extends TestCase
     {
         return $this->assertEquals($wantedStatus, $this->getStatus());
     }
-    
+
     public function isSuccess()
     {
         return $this->status < 400;
@@ -185,17 +180,17 @@ class BlastApiTestCase extends TestCase
     {
         return $this->assertTrue($this->isSuccess());
     }
-    
-    
+
     public function __toString()
     {
         return is_array($this->data) ? json_encode($this->data, JSON_PRETTY_PRINT) : $this->data;
     }
 
     /**
-     * Returns one entity from a list of entities
+     * Returns one entity from a list of entities.
      *
      * $i   integer if < 0, it means that we are expecting a random result
+     *
      * @todo : maybe add ['_embedded']['items'] as param (or not)
      */
     public function getOneFromList($i = -1)
@@ -204,6 +199,7 @@ class BlastApiTestCase extends TestCase
         if (count($data) == 0) {
             return [];
         }
+
         return $i < 0 ? $data[rand(0, count($data) - 1)] : $data[$i];
     }
 }
