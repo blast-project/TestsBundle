@@ -61,7 +61,7 @@ class BlastApiTestCase extends TestCase
     /********** Api Tools **********/
     public function initToken($endpoint, $option, $tokenKey = 'access_token')
     {
-        $route = $endpoint.'?'.http_build_query($option);
+        $route = $endpoint . '?' . http_build_query($option);
         $this->request($route);
         $json = $this->getData(true);
         $this->assertArrayHasKey($tokenKey, $json);
@@ -78,17 +78,17 @@ class BlastApiTestCase extends TestCase
         echo "######## Result ########\n";
         echo "$endpoint | $action | ";
         echo !$this->isSuccess() ? 'ERROR' : 'SUCCESS';
-        echo ': HTTP '.$this->getStatus()."\n";
+        echo ': HTTP ' . $this->getStatus() . "\n";
 
         if ($this->show_curl) {
             echo "######## Curl ########\n";
-            echo $this->lastCurlEquivalent."\n";
+            echo $this->lastCurlEquivalent . "\n";
             $this->lastCurlEquivalent = '';
         }
 
         if ($this->show_results) {
             echo "######## Data ########\n";
-            echo $this->getData()."\n";
+            echo $this->getData() . "\n";
         }
 
         echo "\n\n";
@@ -99,7 +99,7 @@ class BlastApiTestCase extends TestCase
     public function request($uri, $method = 'GET', array $data = [])
     {
         if (isset($this->base)) {
-            $ch = curl_init($this->base.$uri);
+            $ch = curl_init($this->base . $uri);
 
             if ($data) {
                 curl_setopt($ch, CURLOPT_POSTFIELDS, json_encode($data));
@@ -107,7 +107,7 @@ class BlastApiTestCase extends TestCase
 
             $headers = ['Content-Type: application/json'];
             if ($this->token) {
-                $headers[] = 'Authorization: Bearer '.$this->token;
+                $headers[] = 'Authorization: Bearer ' . $this->token;
             }
 
             curl_setopt_array($ch, [
@@ -125,11 +125,11 @@ class BlastApiTestCase extends TestCase
                     str_replace(
                         ['[', ']', ' '],
                         ['\\[', '\\]', '%20'],
-                        $this->base.$uri
+                        $this->base . $uri
                     ),
                     $h,
                     $method,
-                    $data ? "--data '".json_encode($data)."'" : ''
+                    $data ? "--data '" . json_encode($data) . "'" : ''
                 );
             }
 
