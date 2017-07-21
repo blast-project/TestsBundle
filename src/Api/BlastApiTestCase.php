@@ -98,19 +98,19 @@ class BlastApiTestCase extends TestCase
 
     private function convertUriAbsolute($uri)
     {
-        if ( !$this->base ) {
+        if (!$this->base) {
             return $uri;
         }
-        
-        if ( strpos($uri, 'http://') === 0 || strpos($uri, 'https://') === 0 ) {
+
+        if (strpos($uri, 'http://') === 0 || strpos($uri, 'https://') === 0) {
             return $uri;
         }
-        
+
         return $this->base . $uri;
     }
-    
+
     /**
-     * Sends a HTTP request using CURL
+     * Sends a HTTP request using CURL.
      *
      * @param $uri    string   absolute or relative (to $this->base) URI
      * @param $data   array    data to be sent
@@ -119,11 +119,11 @@ class BlastApiTestCase extends TestCase
     public function request($uri, $method = 'GET', array $data = [], $format = 'json')
     {
         $absoluteUri = $this->convertUriAbsolute($uri);
-        
+
         $ch = curl_init($absoluteUri);
 
         if ($data) {
-            switch ( $format ) {
+            switch ($format) {
                 case 'urlencoded':
                     $encodedData = http_build_query($data);
                     break;
