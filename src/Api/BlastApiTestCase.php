@@ -96,50 +96,62 @@ class BlastApiTestCase extends TestCase
         return $this;
     }
 
+    private function convertUriAbsolute($uri)
+    {
+        if ( !$this->base ) {
+            return $uri;
+        }
+        
+        if ( strpos($uri, 'http://') === 0 || strpos($uri, 'https://') === 0 ) {
+            return $uri;
+        }
+        
+        return $this->base . $uri;
+    }
+    
     public function request($uri, $method = 'GET', array $data = [])
     {
-        if (isset($this->base)) {
-            $ch = curl_init($this->base . $uri);
+        $absoluteUri = $this->convertUriAbsolute($uri);
+        
+        $ch = curl_init($absoluteUri);
 
-            if ($data) {
-                curl_setopt($ch, CURLOPT_POSTFIELDS, json_encode($data));
-            }
-
-            $headers = ['Content-Type: application/json'];
-            if ($this->token) {
-                $headers[] = 'Authorization: Bearer ' . $this->token;
-            }
-
-            curl_setopt_array($ch, [
-                CURLOPT_HTTPHEADER => $headers,
-                CURLOPT_RETURNTRANSFER => true,
-                CURLOPT_SSL_VERIFYHOST => 0,
-                CURLOPT_SSL_VERIFYPEER => 0,
-                CURLOPT_CUSTOMREQUEST => $method,
-            ]);
-
-            if ($this->show_curl) {
-                $h = implode('" -H "', $headers);
-                $this->lastCurlEquivalent = sprintf(
-                    '$ curl -k "%s" -H "%s" -X %s %s',
-                    str_replace(
-                        ['[', ']', ' '],
-                        ['\\[', '\\]', '%20'],
-                        $this->base . $uri
-                    ),
-                    $h,
-                    $method,
-                    $data ? "--data '" . json_encode($data) . "'" : ''
-                );
-            }
-
-            $this->getHTTPResult($ch);
-
-            curl_close($ch);
-
-            $this->printResult($uri, $method);
+        if ($data) {
+            curl_setopt($ch, CURLOPT_POSTFIELDS, json_encode($data));
         }
-        //        return $res;
+
+        $headers = ['Content-Type: application/json'];
+        if ($this->token) {
+            $headers[] = 'Authorization: Bearer ' . $this->token;
+        }
+
+        curl_setopt_array($ch, [
+            CURLOPT_HTTPHEADER => $headers,
+            CURLOPT_RETURNTRANSFER => true,
+            CURLOPT_SSL_VERIFYHOST => 0,
+            CURLOPT_SSL_VERIFYPEER => 0,
+            CURLOPT_CUSTOMREQUEST => $method,
+        ]);
+
+        if ($this->show_curl) {
+            $h = implode('" -H "', $headers);
+            $this->lastCurlEquivalent = sprintf(
+                '$ curl -k "%s" -H "%s" -X %s %s',
+                str_replace(
+                    ['[', ']', ' '],
+                    ['\\[', '\\]', '%20'],
+                    $absoluteUri
+                ),
+                $h,
+                $method,
+                $data ? "--data '" . json_encode($data) . "'" : ''
+            );
+        }
+
+        $this->getHTTPResult($ch);
+
+        curl_close($ch);
+
+        $this->printResult($absoluteUri, $method);
     }
 
     /********** HTTPResult **********/
