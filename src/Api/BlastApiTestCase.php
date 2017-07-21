@@ -109,17 +109,32 @@ class BlastApiTestCase extends TestCase
         return $this->base . $uri;
     }
     
-    public function request($uri, $method = 'GET', array $data = [])
+    /**
+     * Sends a HTTP request using CURL
+     *
+     * @param $uri    string   absolute or relative (to $this->base) URI
+     * @param $data   array    data to be sent
+     * @param $format   string   can be "json" or "urlencoded"
+     **/
+    public function request($uri, $method = 'GET', array $data = [], $format = 'json')
     {
         $absoluteUri = $this->convertUriAbsolute($uri);
         
         $ch = curl_init($absoluteUri);
 
         if ($data) {
-            curl_setopt($ch, CURLOPT_POSTFIELDS, json_encode($data));
+            switch ( $format ) {
+                case 'urlencoded':
+                    $encodedData = http_build_query($data);
+                    break;
+                default:
+                    $encodedData = json_encode($data);
+                    break;
+            }
+            curl_setopt($ch, CURLOPT_POSTFIELDS, $encodedData);
         }
 
-        $headers = ['Content-Type: application/json'];
+        $headers = $format == 'json' ? ['Content-Type: application/json'] : [];
         if ($this->token) {
             $headers[] = 'Authorization: Bearer ' . $this->token;
         }
@@ -143,7 +158,7 @@ class BlastApiTestCase extends TestCase
                 ),
                 $h,
                 $method,
-                $data ? "--data '" . json_encode($data) . "'" : ''
+                $data ? "--data '" . $encodedData . "'" : ''
             );
         }
 
