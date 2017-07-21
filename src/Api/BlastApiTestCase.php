@@ -118,6 +118,7 @@ class BlastApiTestCase extends TestCase
      **/
     public function request($uri, $method = 'GET', array $data = [], $format = 'json')
     {
+        $method = strtoupper($method);
         $absoluteUri = $this->convertUriAbsolute($uri);
         
         $ch = curl_init($absoluteUri);
