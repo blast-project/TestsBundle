@@ -1,7 +1,7 @@
 #!/bin/bash
 
 branch_list="master wip-test wip-lisem"
-scrut_file="Quality.test.md"
+scrut_file="Quality.md"
 
 sep () {
     echo -n " | " 
