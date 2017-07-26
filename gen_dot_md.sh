@@ -1,7 +1,9 @@
 #!/bin/bash
 
 branch_list="master wip-test wip-lisem"
-scrut_file="Quality.md"
+scrut_file="icmd/Quality.md"
+cover_file="icmd/Coverage.md"
+build_file="icmd/Build.md"
 
 sep () {
     echo -n " | " 
@@ -64,12 +66,51 @@ scrut_link () {
     echo
 }
 
+travis_link () {
+    sep 
+    repo_link 
+    for branch in ${branch_list}
+    do
+        repo_check
+        if [ $? -eq 0 ]
+        then
+            echo -n "[![Build Status](https://travis-ci.org/${account}/${repo}.svg?branch=${branch})](https://travis-ci.org/${account}/${repo})"
+        fi
+        sep 
+    done
+    echo
+}
+
+cover_link () {
+    sep 
+    repo_link 
+    for branch in ${branch_list}
+    do
+        repo_check
+        if [ $? -eq 0 ]
+        then
+            echo -n " [![Coverage Status](https://coveralls.io/repos/github/${account}/${repo}/badge.svg?branch=${branch})](https://coveralls.io/github/${account}/${repo}?branch=${branch}) "
+        fi
+        sep 
+    done
+    echo
+}
+
+
+echo "### Scrutinizer #" > ${scrut_file}
+echo  >> ${scrut_file}
+table_init >> ${scrut_file}
+
+echo "### Travis #" > ${build_file}
+echo  >> ${build_file}
+table_init >> ${build_file}
+
+echo "### Coveralls #" > ${cover_file}
+echo  >> ${cover_file}
+table_init >> ${cover_file}
+
 for search_dir in $@
 do
-    ########## Scrutinizer ###########
-    echo "### Scrutinizer #" > ${scrut_file}
-    echo  >> ${scrut_file}
-    table_init >> ${scrut_file}
     
     for ff  in $(find ${search_dir} -maxdepth 2 -name 'composer.json')
     do
@@ -77,17 +118,14 @@ do
         repo=$(basename ${fd}) 
         account=$(basename $(dirname ${fd})) 
 
-        ########## Scrutinizer ###########
         scrut_link >> ${scrut_file}
+        travis_link >> ${build_file}
+        cover_link >> ${cover_file}
 
         
     done
 done
 
 
-########## Scrutinizer ###########
 
-############ Travis ##############
-
-########## Coveralls ###########
 
