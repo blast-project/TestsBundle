@@ -7,21 +7,6 @@ sep () {
     echo -n " | " 
 }
 
-repo_check ()
-{
-    curl -f "https://github.com/${account}/${repo}/tree/${branch}" > /dev/null 2>&1
-}
-
-
-repo_link () {
-    branch=master
-    repo_check
-    if [ $? -eq 0 ]
-       then
-           echo -n "[${repo}](https://github.com/${account}/${repo})"   
-    fi
-}
-
 table_init () {
    
     ##### Table header #####
@@ -48,7 +33,25 @@ table_init () {
     
 }
 
+repo_check ()
+{
+    curl -f "https://github.com/${account}/${repo}/tree/${branch}" > /dev/null 2>&1
+}
+
+repo_link () {
+    branch=master
+    repo_check
+    if [ $? -eq 0 ]
+       then
+           echo -n "[${repo}](https://github.com/${account}/${repo})"   
+    fi
+    sep
+}
+
+
 scrut_link () {
+    sep 
+    repo_link 
     for branch in ${branch_list}
     do
         repo_check
@@ -56,8 +59,9 @@ scrut_link () {
         then
             echo -n "[![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/${account}/${repo}/badges/quality-score.png?b=${branch})](https://scrutinizer-ci.com/g/${account}/${repo}/?branch=${branch})"
         fi
-        sep >> ${scrut_file}
+        sep 
     done
+    echo
 }
 
 for search_dir in $@
@@ -67,21 +71,15 @@ do
     echo  >> ${scrut_file}
     table_init >> ${scrut_file}
     
-    for ff  in $(find ${search_dir} -name 'composer.json' | grep -v vendor)
+    for ff  in $(find ${search_dir} -maxdepth 2 -name 'composer.json')
     do
         fd=$(dirname ${ff})
         repo=$(basename ${fd}) 
         account=$(basename $(dirname ${fd})) 
 
         ########## Scrutinizer ###########
-        echo https://scrutinizer-ci.com/g/${account}/${repo}/badges/quality-score.png?b=${branch}
-        sep >> ${scrut_file}        
-        repo_link >> ${scrut_file}
-        sep >> ${scrut_file}
+        scrut_link >> ${scrut_file}
 
-            scrut_link >> ${scrut_file}
-        
-        echo >> ${scrut_file}
         
     done
 done
