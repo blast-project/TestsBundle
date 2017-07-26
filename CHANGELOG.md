@@ -1,6 +1,18 @@
 # Change Log
 
-## [0.4.4](https://github.com/blast-project/TestsBundle/tree/0.4.4) (2017-06-15)
+## [Unreleased](https://github.com/blast-project/TestsBundle/tree/HEAD)
+
+[Full Changelog](https://github.com/blast-project/TestsBundle/compare/0.4.4...HEAD)
+
+**Merged pull requests:**
+
+- DevKit updates for TestsBundle [\#10](https://github.com/blast-project/TestsBundle/pull/10) ([BlastCI](https://github.com/BlastCI))
+- DevKit updates for TestsBundle [\#8](https://github.com/blast-project/TestsBundle/pull/8) ([BlastCI](https://github.com/BlastCI))
+- DevKit updates for TestsBundle [\#7](https://github.com/blast-project/TestsBundle/pull/7) ([BlastCI](https://github.com/BlastCI))
+- DevKit updates for TestsBundle [\#6](https://github.com/blast-project/TestsBundle/pull/6) ([BlastCI](https://github.com/BlastCI))
+- DevKit updates for TestsBundle [\#5](https://github.com/blast-project/TestsBundle/pull/5) ([BlastCI](https://github.com/BlastCI))
+
+## [0.4.4](https://github.com/blast-project/TestsBundle/tree/0.4.4) (2017-06-27)
 [Full Changelog](https://github.com/blast-project/TestsBundle/compare/0.4.3...0.4.4)
 
 ## [0.4.3](https://github.com/blast-project/TestsBundle/tree/0.4.3) (2017-06-13)
