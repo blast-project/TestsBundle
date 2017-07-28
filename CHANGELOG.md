@@ -1,8 +1,7 @@
 # Change Log
 
-## [Unreleased](https://github.com/blast-project/TestsBundle/tree/HEAD)
-
-[Full Changelog](https://github.com/blast-project/TestsBundle/compare/0.4.4...HEAD)
+## [0.4.5](https://github.com/blast-project/TestsBundle/tree/0.4.5) (2017-07-26)
+[Full Changelog](https://github.com/blast-project/TestsBundle/compare/0.4.4...0.4.5)
 
 **Merged pull requests:**
 
