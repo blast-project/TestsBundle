@@ -85,7 +85,7 @@ class BlastTestCase extends KernelTestCase
     protected function cacheClear()
     {
         return $this->launchCommand([
-            'command' => 'cache:clear',
+            'command'     => 'cache:clear',
             '--no-warmup' => true,
         ]);
     }
@@ -93,16 +93,16 @@ class BlastTestCase extends KernelTestCase
     protected function dropDatabase()
     {
         return $this->launchCommand([
-            'command' => 'doctrine:database:drop',
+            'command'     => 'doctrine:database:drop',
             '--if-exists' => true,
-            '--force' => true,
+            '--force'     => true,
         ]);
     }
 
     protected function createDatabase()
     {
         return $this->launchCommand([
-            'command' => 'doctrine:database:create',
+            'command'         => 'doctrine:database:create',
             '--if-not-exists' => true,
           ]);
     }

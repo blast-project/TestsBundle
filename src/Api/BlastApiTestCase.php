@@ -141,11 +141,11 @@ class BlastApiTestCase extends TestCase
         }
 
         curl_setopt_array($ch, [
-            CURLOPT_HTTPHEADER => $headers,
+            CURLOPT_HTTPHEADER     => $headers,
             CURLOPT_RETURNTRANSFER => true,
             CURLOPT_SSL_VERIFYHOST => 0,
             CURLOPT_SSL_VERIFYPEER => 0,
-            CURLOPT_CUSTOMREQUEST => $method,
+            CURLOPT_CUSTOMREQUEST  => $method,
         ]);
 
         if ($this->show_curl) {
