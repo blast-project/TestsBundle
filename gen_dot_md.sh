@@ -1,6 +1,6 @@
 #!/bin/bash
 
-branch_list="master wip-test wip-lisem"
+branch_list="master wip-lisem"
 scrut_file="icmd/Quality.md"
 cover_file="icmd/Coverage.md"
 build_file="icmd/Build.md"
