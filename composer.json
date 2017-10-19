@@ -27,7 +27,6 @@
             "Blast\\TestsBundle\\Tests\\": "tests/"
         }
     },
-    "version": "dev-wip-lisem",
     "suggest": {
         "blast-project/core-bundle": "Define sonata admins in yml and more"
     }
