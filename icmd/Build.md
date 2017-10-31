@@ -1,5 +1,6 @@
-### Travis #
+## Travis #
 
+### blast-project #
  | Name | master | wip-lisem | 
  | -- | -- | -- | 
  | [DoctrineSessionBundle](https://github.com/blast-project/DoctrineSessionBundle) | [![Build Status](https://travis-ci.org/blast-project/DoctrineSessionBundle.svg?branch=master)](https://travis-ci.org/blast-project/DoctrineSessionBundle) | [![Build Status](https://travis-ci.org/blast-project/DoctrineSessionBundle.svg?branch=wip-lisem)](https://travis-ci.org/blast-project/DoctrineSessionBundle) | 
@@ -11,8 +12,19 @@
  | [CoreBundle](https://github.com/blast-project/CoreBundle) | [![Build Status](https://travis-ci.org/blast-project/CoreBundle.svg?branch=master)](https://travis-ci.org/blast-project/CoreBundle) | [![Build Status](https://travis-ci.org/blast-project/CoreBundle.svg?branch=wip-lisem)](https://travis-ci.org/blast-project/CoreBundle) | 
  | [devkit](https://github.com/blast-project/devkit) | [![Build Status](https://travis-ci.org/blast-project/devkit.svg?branch=master)](https://travis-ci.org/blast-project/devkit) | [![Build Status](https://travis-ci.org/blast-project/devkit.svg?branch=wip-lisem)](https://travis-ci.org/blast-project/devkit) | 
  | [bundle-skeleton](https://github.com/blast-project/bundle-skeleton) | [![Build Status](https://travis-ci.org/blast-project/bundle-skeleton.svg?branch=master)](https://travis-ci.org/blast-project/bundle-skeleton) | [![Build Status](https://travis-ci.org/blast-project/bundle-skeleton.svg?branch=wip-lisem)](https://travis-ci.org/blast-project/bundle-skeleton) | 
+ | [ResourceBundle](https://github.com/blast-project/ResourceBundle) | [![Build Status](https://travis-ci.org/blast-project/ResourceBundle.svg?branch=master)](https://travis-ci.org/blast-project/ResourceBundle) | [![Build Status](https://travis-ci.org/blast-project/ResourceBundle.svg?branch=wip-lisem)](https://travis-ci.org/blast-project/ResourceBundle) | 
  | [BaseEntitiesBundle](https://github.com/blast-project/BaseEntitiesBundle) | [![Build Status](https://travis-ci.org/blast-project/BaseEntitiesBundle.svg?branch=master)](https://travis-ci.org/blast-project/BaseEntitiesBundle) | [![Build Status](https://travis-ci.org/blast-project/BaseEntitiesBundle.svg?branch=wip-lisem)](https://travis-ci.org/blast-project/BaseEntitiesBundle) | 
  | [OuterExtensionBundle](https://github.com/blast-project/OuterExtensionBundle) | [![Build Status](https://travis-ci.org/blast-project/OuterExtensionBundle.svg?branch=master)](https://travis-ci.org/blast-project/OuterExtensionBundle) | [![Build Status](https://travis-ci.org/blast-project/OuterExtensionBundle.svg?branch=wip-lisem)](https://travis-ci.org/blast-project/OuterExtensionBundle) | 
+
+### sil-project #
+ | Name | master | wip-lisem | 
+ | -- | -- | -- | 
+ | [StockBundle](https://github.com/sil-project/StockBundle) | [![Build Status](https://travis-ci.org/sil-project/StockBundle.svg?branch=master)](https://travis-ci.org/sil-project/StockBundle) | [![Build Status](https://travis-ci.org/sil-project/StockBundle.svg?branch=wip-lisem)](https://travis-ci.org/sil-project/StockBundle) | 
+ | [ManufacturingBundle](https://github.com/sil-project/ManufacturingBundle) | [![Build Status](https://travis-ci.org/sil-project/ManufacturingBundle.svg?branch=master)](https://travis-ci.org/sil-project/ManufacturingBundle) | [![Build Status](https://travis-ci.org/sil-project/ManufacturingBundle.svg?branch=wip-lisem)](https://travis-ci.org/sil-project/ManufacturingBundle) | 
+
+### libre-informatique #
+ | Name | master | wip-lisem | 
+ | -- | -- | -- | 
  | [EcommerceBundle](https://github.com/libre-informatique/EcommerceBundle) | [![Build Status](https://travis-ci.org/libre-informatique/EcommerceBundle.svg?branch=master)](https://travis-ci.org/libre-informatique/EcommerceBundle) | [![Build Status](https://travis-ci.org/libre-informatique/EcommerceBundle.svg?branch=wip-lisem)](https://travis-ci.org/libre-informatique/EcommerceBundle) | 
  | [SeedBatchBundle](https://github.com/libre-informatique/SeedBatchBundle) | [![Build Status](https://travis-ci.org/libre-informatique/SeedBatchBundle.svg?branch=master)](https://travis-ci.org/libre-informatique/SeedBatchBundle) | [![Build Status](https://travis-ci.org/libre-informatique/SeedBatchBundle.svg?branch=wip-lisem)](https://travis-ci.org/libre-informatique/SeedBatchBundle) | 
  | [EmailBundle](https://github.com/libre-informatique/EmailBundle) | [![Build Status](https://travis-ci.org/libre-informatique/EmailBundle.svg?branch=master)](https://travis-ci.org/libre-informatique/EmailBundle) | [![Build Status](https://travis-ci.org/libre-informatique/EmailBundle.svg?branch=wip-lisem)](https://travis-ci.org/libre-informatique/EmailBundle) | 
