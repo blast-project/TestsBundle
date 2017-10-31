@@ -97,20 +97,28 @@ cover_link () {
 }
 
 
-echo "### Scrutinizer #" > ${scrut_file}
-echo  >> ${scrut_file}
-table_init >> ${scrut_file}
+echo "## Scrutinizer #" > ${scrut_file}
 
-echo "### Travis #" > ${build_file}
-echo  >> ${build_file}
-table_init >> ${build_file}
+echo "## Travis #" > ${build_file}
 
-echo "### Coveralls #" > ${cover_file}
-echo  >> ${cover_file}
-table_init >> ${cover_file}
+echo "## Coveralls #" > ${cover_file}
+
 
 for search_dir in $@
 do
+
+    echo  >> ${scrut_file}
+    echo "### "$(basename ${search_dir})" #"  >> ${scrut_file}
+    table_init >> ${scrut_file}
+
+    echo  >> ${build_file}
+    echo "### "$(basename ${search_dir})" #"  >> ${build_file}
+    table_init >> ${build_file}
+
+    echo  >> ${cover_file}
+    echo "### "$(basename ${search_dir})" #" >> ${cover_file}
+    table_init >> ${cover_file}
+
     
     for ff  in $(find ${search_dir} -maxdepth 2 -name 'composer.json')
     do
