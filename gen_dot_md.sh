@@ -120,7 +120,7 @@ do
     table_init >> ${cover_file}
 
     
-    for ff  in $(find ${search_dir} -maxdepth 2 -name 'composer.json')
+    for ff  in $(find ${search_dir} -maxdepth 2 -name 'composer.json' |sort -u)
     do
         fd=$(dirname ${ff})
         repo=$(basename ${fd}) 
