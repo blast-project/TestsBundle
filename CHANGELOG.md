@@ -1,5 +1,14 @@
 # Change Log
 
+## [0.6.4](https://github.com/blast-project/TestsBundle/tree/0.6.4) (2017-11-03)
+[Full Changelog](https://github.com/blast-project/TestsBundle/compare/0.5.2...0.6.4)
+
+**Merged pull requests:**
+
+- Lisem fix & features [\#16](https://github.com/blast-project/TestsBundle/pull/16) ([FanchTheSystem](https://github.com/FanchTheSystem))
+- DevKit updates for TestsBundle [\#15](https://github.com/blast-project/TestsBundle/pull/15) ([BlastCI](https://github.com/BlastCI))
+- DevKit updates for TestsBundle [\#13](https://github.com/blast-project/TestsBundle/pull/13) ([BlastCI](https://github.com/BlastCI))
+
 ## [0.5.2](https://github.com/blast-project/TestsBundle/tree/0.5.2) (2017-10-19)
 [Full Changelog](https://github.com/blast-project/TestsBundle/compare/0.5.1...0.5.2)
 
