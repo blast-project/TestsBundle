@@ -24,8 +24,8 @@
     ],
     "autoload": {
         "psr-4": {
-            "Blast\\TestsBundle\\": "src/",
-            "Blast\\TestsBundle\\Tests\\": "tests/"
+            "Blast\\Bundle\\TestsBundle\\": "./",
+            "Blast\\Bundle\\TestsBundle\\Tests\\": "Tests/"
         }
     },
     "suggest": {

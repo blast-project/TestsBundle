@@ -10,7 +10,7 @@
  * file that was distributed with this source code.
  */
 
-namespace Blast\TestsBundle\DependencyInjection;
+namespace Blast\Bundle\TestsBundle\DependencyInjection;
 
 use Symfony\Component\HttpKernel\DependencyInjection\Extension;
 use Symfony\Component\DependencyInjection\ContainerBuilder;

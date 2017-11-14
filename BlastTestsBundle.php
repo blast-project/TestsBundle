@@ -10,7 +10,7 @@
  * file that was distributed with this source code.
  */
 
-namespace Blast\TestsBundle;
+namespace Blast\Bundle\TestsBundle;
 
 use Symfony\Component\HttpKernel\Bundle\Bundle;
 
