@@ -1,6 +1,6 @@
 ## Travis #
 
-### blast-project #
+### [blast-project](https://github.com/blast-project/) #
  | Name | master | wip-lisem | wip-platform | 0.6.4 | 
  | -- | -- | -- | -- | -- | 
  | [BaseEntitiesBundle](https://github.com/blast-project/BaseEntitiesBundle) | [![Build Status](https://travis-ci.org/blast-project/BaseEntitiesBundle.svg?branch=master)](https://travis-ci.org/blast-project/BaseEntitiesBundle) | [![Build Status](https://travis-ci.org/blast-project/BaseEntitiesBundle.svg?branch=wip-lisem)](https://travis-ci.org/blast-project/BaseEntitiesBundle) | [![Build Status](https://travis-ci.org/blast-project/BaseEntitiesBundle.svg?branch=wip-platform)](https://travis-ci.org/blast-project/BaseEntitiesBundle) | [![Build Status](https://travis-ci.org/blast-project/BaseEntitiesBundle.svg?branch=0.6.4)](https://travis-ci.org/blast-project/BaseEntitiesBundle) | 
@@ -14,7 +14,7 @@
  | [TestsBundle](https://github.com/blast-project/TestsBundle) | [![Build Status](https://travis-ci.org/blast-project/TestsBundle.svg?branch=master)](https://travis-ci.org/blast-project/TestsBundle) | [![Build Status](https://travis-ci.org/blast-project/TestsBundle.svg?branch=wip-lisem)](https://travis-ci.org/blast-project/TestsBundle) | [![Build Status](https://travis-ci.org/blast-project/TestsBundle.svg?branch=wip-platform)](https://travis-ci.org/blast-project/TestsBundle) | [![Build Status](https://travis-ci.org/blast-project/TestsBundle.svg?branch=0.6.4)](https://travis-ci.org/blast-project/TestsBundle) | 
  | [UtilsBundle](https://github.com/blast-project/UtilsBundle) | [![Build Status](https://travis-ci.org/blast-project/UtilsBundle.svg?branch=master)](https://travis-ci.org/blast-project/UtilsBundle) | [![Build Status](https://travis-ci.org/blast-project/UtilsBundle.svg?branch=wip-lisem)](https://travis-ci.org/blast-project/UtilsBundle) | [![Build Status](https://travis-ci.org/blast-project/UtilsBundle.svg?branch=wip-platform)](https://travis-ci.org/blast-project/UtilsBundle) | [![Build Status](https://travis-ci.org/blast-project/UtilsBundle.svg?branch=0.6.4)](https://travis-ci.org/blast-project/UtilsBundle) | 
 
-### sil-project #
+### [sil-project](https://github.com/sil-project/) #
  | Name | master | wip-lisem | wip-platform | 0.6.4 | 
  | -- | -- | -- | -- | -- | 
  | [CRMBundle](https://github.com/sil-project/CRMBundle) | [![Build Status](https://travis-ci.org/sil-project/CRMBundle.svg?branch=master)](https://travis-ci.org/sil-project/CRMBundle) | [![Build Status](https://travis-ci.org/sil-project/CRMBundle.svg?branch=wip-lisem)](https://travis-ci.org/sil-project/CRMBundle) | [![Build Status](https://travis-ci.org/sil-project/CRMBundle.svg?branch=wip-platform)](https://travis-ci.org/sil-project/CRMBundle) | [![Build Status](https://travis-ci.org/sil-project/CRMBundle.svg?branch=0.6.4)](https://travis-ci.org/sil-project/CRMBundle) | 
@@ -30,7 +30,7 @@
  | [SyliusPayboxBundle](https://github.com/sil-project/SyliusPayboxBundle) | [![Build Status](https://travis-ci.org/sil-project/SyliusPayboxBundle.svg?branch=master)](https://travis-ci.org/sil-project/SyliusPayboxBundle) | [![Build Status](https://travis-ci.org/sil-project/SyliusPayboxBundle.svg?branch=wip-lisem)](https://travis-ci.org/sil-project/SyliusPayboxBundle) | [![Build Status](https://travis-ci.org/sil-project/SyliusPayboxBundle.svg?branch=wip-platform)](https://travis-ci.org/sil-project/SyliusPayboxBundle) | [![Build Status](https://travis-ci.org/sil-project/SyliusPayboxBundle.svg?branch=0.6.4)](https://travis-ci.org/sil-project/SyliusPayboxBundle) | 
  | [VarietyBundle](https://github.com/sil-project/VarietyBundle) | [![Build Status](https://travis-ci.org/sil-project/VarietyBundle.svg?branch=master)](https://travis-ci.org/sil-project/VarietyBundle) | [![Build Status](https://travis-ci.org/sil-project/VarietyBundle.svg?branch=wip-lisem)](https://travis-ci.org/sil-project/VarietyBundle) | [![Build Status](https://travis-ci.org/sil-project/VarietyBundle.svg?branch=wip-platform)](https://travis-ci.org/sil-project/VarietyBundle) | [![Build Status](https://travis-ci.org/sil-project/VarietyBundle.svg?branch=0.6.4)](https://travis-ci.org/sil-project/VarietyBundle) | 
 
-### libre-informatique #
+### [libre-informatique](https://github.com/libre-informatique/) #
  | Name | master | wip-lisem | wip-platform | 0.6.4 | 
  | -- | -- | -- | -- | -- | 
  | [LISemSymfonyProject](https://github.com/libre-informatique/LISemSymfonyProject) | [![Build Status](https://travis-ci.org/libre-informatique/LISemSymfonyProject.svg?branch=master)](https://travis-ci.org/libre-informatique/LISemSymfonyProject) |  |  | [![Build Status](https://travis-ci.org/libre-informatique/LISemSymfonyProject.svg?branch=0.6.4)](https://travis-ci.org/libre-informatique/LISemSymfonyProject) | 

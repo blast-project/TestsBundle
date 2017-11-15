@@ -106,17 +106,18 @@ echo "## Coveralls #" > ${cover_file}
 
 for search_dir in $@
 do
-
+    project_name=$(basename ${search_dir})
+    
     echo  >> ${scrut_file}
-    echo "### "$(basename ${search_dir})" #"  >> ${scrut_file}
+    echo "### [${project_name}](https://github.com/${project_name}/) #"  >> ${scrut_file}
     table_init >> ${scrut_file}
 
     echo  >> ${build_file}
-    echo "### "$(basename ${search_dir})" #"  >> ${build_file}
+    echo "### [${project_name}](https://github.com/${project_name}/) #"  >> ${build_file}
     table_init >> ${build_file}
 
     echo  >> ${cover_file}
-    echo "### "$(basename ${search_dir})" #" >> ${cover_file}
+    echo "### [${project_name}](https://github.com/${project_name}/) #" >> ${cover_file}
     table_init >> ${cover_file}
 
     
